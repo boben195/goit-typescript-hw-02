@@ -5,33 +5,35 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./ImageModal/ImageModal";
 
+
 import { Toaster } from "react-hot-toast";
 //import components(look up)************************************
 import "./App.css";
 import { useEffect, useState } from "react";
 
-import Modal from "react-modal";
+ import Modal from "react-modal";
+ Modal.setAppElement("#root");
 
 import { requestImages } from "../services/api";
 
-function App() {
+const App: React.FC = () => {
   //**/**************************************** 3 first state*/ */
   const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   /**********************************************3 first state */
 
   /*state for pages **********************/
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
   /*state for button "loadmore**********" */
-  const [loadBtn, setLoadBtn] = useState(false);
+  const [loadBtn, setLoadBtn] = useState<boolean>(false);
 
   /*state for modal */
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   const [selectedImg, setSelectedImg] = useState({});
 
-  function openModal(data) {
+  function openModal(data: string) {
     setIsOpen(true);
     setSelectedImg(data);
   }
@@ -40,7 +42,7 @@ function App() {
   }
 
   /*Function for FORM*/
-  const handleSearch = (query) => {
+  const handleSearch = (query: string) => {
     setImages([]);
     setQuery(query);
     setPage(1);
@@ -65,14 +67,9 @@ function App() {
         setIsError(false);
         const { data } = await requestImages(query, page);
 
-        setImages((prevImg) => {
-          return [...prevImg, ...data];
-        });
-
+        setImages((prevImg) => [...prevImg, ...data]);
         setLoadBtn(page >= 1);
-        // if (images.length >= 1 ) {
-        //   setLoadBtn(true);
-        // }
+        
       } catch (err) {
         setIsError(true);
         setLoadBtn(false);

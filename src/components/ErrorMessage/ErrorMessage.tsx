@@ -1,9 +1,14 @@
-const ErrorMessage = ({ message }) => {
+interface Prop {
+  message?: string;
+}
+
+const ErrorMessage: React.FC<Prop> = ({ message = "" }) => {
   return (
     <p>
       {message.length > 0
         ? message
-        : "Ohooopsi Dooooopsi, we have bullshit server. Boo"}
+        : "Ohooopsi Dooooopsi, we have a bullshit server. Boo"}
+      
     </p>
   );
 };

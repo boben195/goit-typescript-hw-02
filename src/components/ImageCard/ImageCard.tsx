@@ -1,5 +1,19 @@
 import css from "../ImageCard/ImageCard.module.css";
-const ImageCard = ({ image, openModal }) => {
+
+
+export interface ImageProp {
+  image: {
+    id: string;
+    urls: {
+      small: string,
+      regular: string
+    }
+    slug: string
+  }
+  openModal: (url: string) => void
+}
+
+const ImageCard: React.FC<ImageProp> = ({ image, openModal }) => {
   const handleClick = () => {
     openModal(image.urls.regular);
   };

@@ -1,6 +1,10 @@
 import toast from "react-hot-toast";
 
-const SearchBar = ({ onAdd }) => {
+interface Prop {
+  onAdd: (query: string) => void
+}
+
+const SearchBar: React.FC<Prop> = ({ onAdd }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;

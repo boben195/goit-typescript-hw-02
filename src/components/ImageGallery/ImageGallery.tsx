@@ -1,7 +1,15 @@
 import ImageCard from "../ImageCard/ImageCard";
 import css from "../ImageGallery/ImageGallery.module.css";
 
-const ImageGallery = ({ images, openModal }) => {
+import { ImageProp } from "../ImageCard/ImageCard";
+
+interface Prop {
+  images: ImageProp[];
+  openModal: (url: string) => void
+  
+}
+
+const ImageGallery: React.FC<Prop> = ({ images, openModal }) => {
   if (!Array.isArray(images) || images.length === 0) {
     return null;
   }
