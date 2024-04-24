@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast";
 //import components(look up)************************************
 import "./App.css";
 import { useEffect, useState } from "react";
-
+import { ImageProp } from "./ImageCard/ImageCard";
  import Modal from "react-modal";
  Modal.setAppElement("#root");
 
