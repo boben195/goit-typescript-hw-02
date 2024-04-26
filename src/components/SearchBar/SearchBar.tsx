@@ -5,12 +5,12 @@ interface Prop {
 }
 
 const SearchBar: React.FC<Prop> = ({ onAdd }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target;
-    const query = form.elements.query.value;
+    const query = (form.elements.namedItem("query") as HTMLInputElement).value;
 
-    if (form.elements.query.value.trim() === "") {
+    if (query.trim() === "") {
       toast("Are you from cave? Enter something!!!");
       return;
     }
