@@ -18,7 +18,7 @@ import { requestImages } from "../services/api";
 
 const App: React.FC = () => {
   //**/**************************************** 3 first state*/ */
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<ImageProp>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   /**********************************************3 first state */
@@ -31,7 +31,7 @@ const App: React.FC = () => {
 
   /*state for modal */
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedImg, setSelectedImg] = useState({});
+  const [selectedImg, setSelectedImg] = useState<string>("");
 
   function openModal(data: string) {
     setIsOpen(true);
@@ -65,7 +65,7 @@ const App: React.FC = () => {
       try {
         setIsLoading(true);
         setIsError(false);
-        const { data } = await requestImages(query, page);
+        const { data }: {data: ImageProp[]} = await requestImages(query, page);
 
         setImages((prevImg) => [...prevImg, ...data]);
         setLoadBtn(page >= 1);
@@ -80,22 +80,7 @@ const App: React.FC = () => {
     fetchData();
   }, [query, page]);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       setIsLoading(true);
-  //       const { data } = await requestImages(images, page);
-  //       if (Array.isArray(data) && data.length > 0) {
-  //         setSlides(data);
-  //       }
-  //     } catch (err) {
-  //       setIsError(true);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   }
-  //   fetchData();
-  // }, [images, page]);
+  
 
   return (
     <>
